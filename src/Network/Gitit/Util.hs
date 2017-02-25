@@ -21,6 +21,7 @@ module Network.Gitit.Util ( readFileUTF8
                           , inDir
                           , withTempDir
                           , orIfNull
+                          , split
                           , splitCategories
                           , trim
                           , yesOrNo
@@ -78,11 +79,18 @@ createTempDir num baseName = do
 orIfNull :: [a] -> [a] -> [a]
 orIfNull lst backup = if null lst then backup else lst
 
+-- | Splits a string into components delimited by separators, where separators
+-- are defined by the given predicate function.
+split :: (Char -> Bool) -> String -> [String]
+split _ "" = [""]
+split p (c:cs)
+  | p c       = "" : split p cs
+  | otherwise = let (x : xs) = split p cs
+                in (c : x) : xs
+
 -- | Split a string containing a list of categories.
 splitCategories :: String -> [String]
-splitCategories = words . map puncToSpace . trim
-     where puncToSpace x | x `elem` ".,;:" = ' '
-           puncToSpace x = x
+splitCategories = filter (not . null) . map trim . split (== ',')
 
 -- | Trim leading and trailing spaces.
 trim :: String -> String

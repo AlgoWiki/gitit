@@ -137,7 +137,7 @@ Pages may optionally begin with a metadata block.  Here is an example:
 
     ---
     format: latex+lhs
-    categories: haskell math
+    categories: haskell, math
     toc: no
     title: Haskell and
       Category Theory
@@ -164,7 +164,7 @@ format
     the default page type will be used.
 
 categories
-:   A space or comma separated list of categories to which the page belongs.
+:   A comma separated list of categories to which the page belongs.
 
 toc
 :   Overrides default setting for table-of-contents in the configuration file.

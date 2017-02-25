@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 -
 -  The metadata block may be omitted entirely, and any particular line
 -  may be omitted. The categories in the @categories@ field should be
--  separated by spaces. Commas will be treated as spaces.
+-  separated by commas.
 -
 -  Metadata value fields may be continued on the next line, as long as
 -  it is nonblank and starts with a space character.
