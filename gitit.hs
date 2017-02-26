@@ -155,11 +155,7 @@ copyrightMessage = "\nCopyright (C) 2008 John MacFarlane\n" ++
 
 compileInfo :: String
 compileInfo =
-#ifdef _PLUGINS
   " +plugins"
-#else
-  " -plugins"
-#endif
 
 handleFlag :: Config -> ConfigOpt -> Config
 handleFlag conf Debug = conf{ debugMode = True, logLevel = DEBUG }

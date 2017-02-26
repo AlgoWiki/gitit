@@ -107,12 +107,6 @@ Flag network-uri
   Description: Get Network.URI from the network-uri package
   Default: True
 
-Flag plugins
-  description:       Compile in support for plugins.  This will increase the size of
-                     the executable and the memory it uses, so those who will not need
-                     plugins should disable this flag.
-  default:           True
-
 Library
   hs-source-dirs:    src
   exposed-modules:   Network.Gitit, Network.Gitit.ContentTransformer,
@@ -179,10 +173,8 @@ Library
     build-depends:   network-uri >= 2.6 && < 2.7, network >= 2.6
   else
     build-depends:   network >= 2 && < 2.6
-  if flag(plugins)
-    exposed-modules: Network.Gitit.Interface
-    build-depends:   ghc, ghc-paths
-    cpp-options:     -D_PLUGINS
+  exposed-modules:   Network.Gitit.Interface
+  build-depends:     ghc, ghc-paths
   extensions:        CPP
   ghc-options:       -Wall -fno-warn-unused-do-bind
   ghc-prof-options:  -fprof-auto-exported

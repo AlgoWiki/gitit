@@ -26,7 +26,6 @@ import Network.Gitit.Types
 import System.FilePath (takeBaseName)
 import Control.Monad (unless)
 import System.Log.Logger (logM, Priority(..))
-#ifdef _PLUGINS
 import Data.List (isInfixOf, isPrefixOf)
 import GHC
 import GHC.Paths
@@ -60,16 +59,6 @@ loadPlugin pluginName = do
       value <- compileExpr (modName ++ ".plugin :: Plugin")
       let value' = (unsafeCoerce value) :: Plugin
       return value'
-
-#else
-
-loadPlugin :: FilePath -> IO Plugin
-loadPlugin pluginName = do
-  error $ "Cannot load plugin '" ++ pluginName ++
-          "'. gitit was not compiled with plugin support."
-  return undefined
-
-#endif
 
 loadPlugins :: [FilePath] -> IO [Plugin]
 loadPlugins pluginNames = do
