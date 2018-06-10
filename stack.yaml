@@ -1,6 +1,5 @@
 flags:
   gitit:
-    plugins: true
     network-uri: true
 packages:
 - '.'
