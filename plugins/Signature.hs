@@ -4,7 +4,7 @@ module Signature (plugin) where
 -- of the last edit, prior to saving the page in the repository.
 
 import Network.Gitit.Interface
-import Data.DateTime (getCurrentTime, formatDateTime)
+import Data.Time (getCurrentTime, formatTime, defaultTimeLocale)
 
 plugin :: Plugin
 plugin = PreCommitTransform replacedate
@@ -17,7 +17,7 @@ replacedate ('$':'S':'I':'G':'$':xs) = do
   let username = case mbuser of
                    Nothing  -> "???"
                    Just u   -> uUsername u
-  let sig = concat ["-- ", username, " (", formatDateTime "%c" datetime, ")"]
+  let sig = concat ["-- ", username, " (", formatTime defaultTimeLocale "%c" datetime, ")"]
   fmap (sig ++ ) $ replacedate xs
 replacedate (x:xs) = fmap (x : ) $ replacedate xs
 
