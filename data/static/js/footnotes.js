@@ -5,7 +5,7 @@ $(document).ready(function() {
 var Footnotes = {
     footnotetimeout: false,
     setup: function() {
-        var footnotelinks = $('.footnoteRef')
+        var footnotelinks = $('.footnote-ref')
 
         footnotelinks.unbind('mouseover',Footnotes.footnoteover);
         footnotelinks.unbind('mouseout',Footnotes.footnoteoout);
@@ -25,6 +25,7 @@ var Footnotes = {
         div.attr('id','footnotediv');
         div.bind('mouseover',Footnotes.divover);
         div.bind('mouseout',Footnotes.footnoteoout);
+        div.css({ position: "absolute", opacity: 0.95 });
 
         var el = document.getElementById(id);
         div.html('<div>'+$(el).html()+'</div>');
@@ -37,12 +38,7 @@ var Footnotes = {
         var top = position.top+20;
         if(top + div.height() > $(window).height() + $(window).scrollTop())
             top = position.top - div.height() - 15;
-        div.css({
-            left:left,
-            top:top,
-            opacity:0.95,
-            position: "absolute"
-            });
+        div.css({ left:left, top:top });
     },
     footnoteoout: function() {
         Footnotes.footnotetimeout = setTimeout(function() {
