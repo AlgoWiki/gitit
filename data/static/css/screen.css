@@ -107,7 +107,15 @@ div#categoryList { padding: 0em; margin: 1em 0 0 0; border: 1px dashed #ccc; }
 .search_result .match { margin-bottom: 15px; }
 
 pre>code { display: block; }
-pre.matches { margin: 0; padding: 0; }
+pre.matches {
+    margin: 0;
+    padding: 0;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
 #pattern { background-color: yellow; font-weight: bold; }
 pre.matches span.highlighted { background-color: yellow; }
 
