@@ -294,7 +294,10 @@ sharedValidation validationType params = do
         Register -> case accessQuestion cfg of
             Nothing           -> True
             Just (_, answers) -> accessCode `elem` answers
-  let isValidEmail e = length (filter (=='@') e) == 1
+  let isValidEmail e = length (filter (=='@') e) == 1 &&
+                       length (filter (==' ') e) == 0 &&
+                       length (filter (=='\n') e) == 0 &&
+                       head e /= '-'
   peer <- liftM (fst . rqPeer) askRq
   captchaResult <-
     if useRecaptcha cfg
