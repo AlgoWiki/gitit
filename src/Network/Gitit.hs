@@ -175,6 +175,7 @@ wikiHandlers =
   , dir "_upload"   $  do guard =<< return . uploadsAllowed =<< getConfig
                           msum [ method GET  >> authenticate ForModify uploadForm
                                  , method POST >> authenticate ForModify uploadFile ]
+  , dir "_create"   createPageForm
   , dir "_random"   $ method GET  >> randomPage
   , dir "_index"    indexPage
   , dir "_feed"     feedHandler

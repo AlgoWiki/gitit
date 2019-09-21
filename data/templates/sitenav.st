@@ -6,6 +6,7 @@
       <li><a href="$base$/_index">All pages</a></li>
       <li><a href="$base$/_categories">Categories</a></li>
       <li><a href="$base$/_random">Random page</a></li>
+      <li><a href="$base$/_create">Create page</a></li>
       <li><a href="$base$/_activity">Recent activity</a></li>
       $if(wikiupload)$
         <li><a href="$base$/_upload">Upload a file</a></li>

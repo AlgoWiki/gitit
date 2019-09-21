@@ -26,6 +26,7 @@ module Network.Gitit.Handlers (
                       , randomPage
                       , discussPage
                       , createPage
+                      , createPageForm
                       , showActivity
                       , goToPage
                       , searchResults
@@ -153,6 +154,23 @@ createPage = do
                                 (urlEncodeVars [("patterns", page)])] <<
                               ("Search for pages containing the text '" ++
                                 page ++ "'")])
+
+createPageForm :: Handler
+createPageForm = do
+  formattedPage defaultPageLayout{
+                      pgPageName = "Create page"
+                    , pgTabs = []
+                    , pgShowPageTools = False
+                    , pgTitle = "Create page"
+                    , pgScripts = ["create.js"]
+                    } $
+   form ! [identifier "create"] <<
+   fieldset <<
+   [ p << [ label ! [thefor "title"] << "Title of new page:"
+          , br
+          , textfield "title" ! [size "40"]
+          , submit "create" "Create" ]
+   ]
 
 uploadForm :: Handler
 uploadForm = withData $ \(params :: Params) -> do
