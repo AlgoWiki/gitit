@@ -69,7 +69,7 @@ import System.FilePath
 import Network.Gitit.State
 import Text.XHtml hiding ( (</>), dir, method, password, rev )
 import qualified Text.XHtml as X ( method )
-import Data.List (intercalate, intersperse, delete, nub, sortBy, find, isPrefixOf, inits, sort, (\\))
+import Data.List (intercalate, intersperse, delete, nub, sortBy, find, isPrefixOf, isInfixOf, inits, sort, (\\))
 import Data.List.Split (wordsBy)
 import Data.Maybe (fromMaybe, mapMaybe, isJust, catMaybes)
 import Data.Ord (comparing)
@@ -291,7 +291,7 @@ searchResults = withData $ \(params :: Params) -> do
                    then return []
                    else liftIO $ E.catch (search fs SearchQuery{
                                                   queryPatterns = patterns
-                                                , queryWholeWords = True
+                                                , queryWholeWords = False
                                                 , queryMatchAll = True
                                                 , queryIgnoreCase = True })
                                        -- catch error, because newer versions of git
@@ -301,7 +301,7 @@ searchResults = withData $ \(params :: Params) -> do
   let contentMatches = map matchResourceName matchLines
   allPages <- liftIO (index fs) >>= filterM isPageFile
   let slashToSpace = map (\c -> if c == '/' then ' ' else c)
-  let inPageName pageName' x = x `elem` (words $ slashToSpace $ dropExtension pageName')
+  let inPageName pageName' x = x `isInfixOf` (slashToSpace $ dropExtension pageName')
   let matchesPatterns pageName' = not (null patterns) &&
        all (inPageName (map toLower pageName')) (map (map toLower) patterns)
   let pageNameMatches = filter matchesPatterns allPages
